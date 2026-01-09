@@ -10,16 +10,12 @@ export default async function CommentList({
   comments: GetPostCommentsQueryResult | GetCommentRepliesQueryResult;
   userId: string | null;
 }) {
-  const isRootComment = !comments.some((comment) => comment.parentComment);
-
   return (
     <section className="mt-8">
       <div className="flex items-center justify-between">
-        {isRootComment && (
-          <h2 className="text-lg font-semibold text-gray-900">
-            Comments ({comments.length})
-          </h2>
-        )}
+        <h2 className="text-lg font-semibold text-gray-900">
+          Comments ({comments.length})
+        </h2>
       </div>
 
       <div className="divide-y divide-gray-100 rounded-lg bg-white">
