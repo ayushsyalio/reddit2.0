@@ -1,3 +1,4 @@
+'use server'
 import {
   GetAllPostsQueryResult,
   GetPostsforsubreaditQueryResult,
@@ -111,6 +112,7 @@ export default async function Post({ post, userId }: Postprops) {
 
       <div className="absolute top-0 right-2 p-2">
         <div className="flex items-center gap-2">
+          
         <ReportButton contentId={post._id} />
         {post.author?._id && (
           <DeleteButton

@@ -5,6 +5,7 @@ import { deletePost } from "@/action/deletePost";
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
 import { Trash2 } from "lucide-react";
+
 import { useState } from "react";
 
 interface DeletButtonProps{
@@ -22,11 +23,11 @@ function DeleteButton({
     const [error, setError] = useState<string | null>(null);
     const {isSignedIn, user} = useUser()
     
+    
     const handleDelete = async ()=>{
         if(isDeleting || !isSignedIn) return;
-        if(window.confirm("Are you sure want to delete this?")){
-            return;
-        }
+       const confirm = window.confirm("Are you sure want to delete this"+contentType+"?");
+       if(!confirm) return;
         setIsDeleting(true);
         setError(null);
 
@@ -34,6 +35,7 @@ function DeleteButton({
             const response = contentType === "post" 
             ?await deletePost(contentId)
             :await deleteComments(contentId);
+            
         } catch (error) {
             setError("Failed to delete. Please try again")
             console.error(`Failed to delete ${contentType}:`, error)   

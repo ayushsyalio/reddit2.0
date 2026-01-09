@@ -16,9 +16,12 @@ import { Textarea } from "../ui/textarea";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { createCommunity } from "@/action/createCommunity";
-import { useRouter } from "next/navigation";
+
+import { useMounted } from "@/hooks/use-mounted";
 
 const CreateCommunityButton = () => {
+  
+
   const { user } = useUser();
   const [open, setOpen] = useState(false);
   const [errormsg, setErrorMsg] = useState("");
@@ -29,7 +32,7 @@ const CreateCommunityButton = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isPending, transition] = useTransition();
-  const router = useRouter();
+
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -131,6 +134,8 @@ const CreateCommunityButton = () => {
       }
     });
   };
+  const mounted = useMounted();
+  if(!mounted) return null;
 
   return (
     <div>
