@@ -3,32 +3,39 @@
 A full-stack Reddit-like community platform where users can create communities, post content, and interact through comments and voting. This project focuses on building core social platform features with clean architecture and real-world functionality.
 
 🚀 Features
+
 🔐 Authentication
+
 User sign-up and login
 Secure authentication flow
 Protected actions for authenticated users
 
 🏘️ Communities
+
 Create new communities
 Update community details
 Delete communities
 View community-specific posts
 
 📝 Posts
+
 Create posts within communities
 Edit and delete own posts
 View posts in a feed
 
 💬 Comments
+
 Add comments to posts
 View threaded discussions
 
 👍 Voting System
+
 Upvote posts
 Downvote posts
 Real-time vote count updates
 
 🧠 Content Management with Sanity
+
 This application uses Sanity as a headless CMS to manage all dynamic content.
 
 Why Sanity?
