@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🧵 Reddit Clone Application
 
-## Getting Started
+A full-stack Reddit-like community platform where users can create communities, post content, and interact through comments and voting. This project focuses on building core social platform features with clean architecture and real-world functionality.
 
-First, run the development server:
+🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🔐 Authentication
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+User sign-up and login
+Secure authentication flow
+Protected actions for authenticated users
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🏘️ Communities
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create new communities
+Update community details
+Delete communities
+View community-specific posts
 
-## Learn More
+📝 Posts
 
-To learn more about Next.js, take a look at the following resources:
+Create posts within communities
+Edit and delete own posts
+View posts in a feed
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+💬 Comments
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Add comments to posts
+View threaded discussions
 
-## Deploy on Vercel
+👍 Voting System
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Upvote posts
+Downvote posts
+Real-time vote count updates
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🧠 Content Management with Sanity
+
+This application uses Sanity as a headless CMS to manage all dynamic content.
+
+Why Sanity?
+
+Structured content modeling
+Real-time content updates
+Scalable and production-ready
+Seamless integration with Next.js
+Managed Content
+Communities
+Posts
+Comments
+User-related metadata
+Voting data
+
+🛠️ Tech Stack
+Frontend
+Next.js
+React
+TypeScript
+Tailwind CSS
+
+Backend / CMS
+Sanity (Headless CMS)
+Sanity Studio
+
+Authentication
+Clerk Authentication
+Tools
+Git & GitHub
+
+⚙️ Environment Variables
+
+Create a .env.local file and add:
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+
+📚 Learning Outcomes
+
+Designing a Reddit-style community platform
+Working with a headless CMS (Sanity)
+Deploying and managing Sanity Studio
+Implementing authentication and protected actions
+Handling voting and commenting systems
+Building scalable content-driven applications
+
+🔮 Future Improvements
+
+UI improvements
+Community moderation roles
+Post sorting (hot, new, top)
+Notifications
+Popular and controversial post filters
+
+👤 Author
+
+Ayush Syal
+BCA Graduate | Full-Stack Developer
+
+🔗 Portfolio: https://ayushsyal-portfolio.netlify.app/
+
+🔗 LinkedIn: https://www.linkedin.com/in/ayush-syal-712968277
+
