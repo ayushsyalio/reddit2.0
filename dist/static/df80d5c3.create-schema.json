@@ -1,0 +1,618 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The unique username for this user",
+        "name": "username",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "user's email address",
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "description": "user's profile picture",
+        "name": "imageUrl",
+        "type": "string",
+        "title": "Image URL"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "when this user account was created",
+        "name": "joinedAt",
+        "type": "datetime"
+      },
+      {
+        "initialValue": false,
+        "description": "Whether this user has been reported",
+        "name": "isReported",
+        "type": "boolean"
+      }
+    ],
+    "name": "user",
+    "type": "document"
+  },
+  {
+    "validation": [
+      {
+        "rules": [
+          {
+            "flag": "custom"
+          }
+        ],
+        "level": "error"
+      }
+    ],
+    "description": "Tracks user votes on posts and comments",
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The user who cast this vote",
+        "to": [
+          {
+            "type": "user"
+          }
+        ],
+        "name": "user",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Upvote",
+              "value": "upvote"
+            },
+            {
+              "title": "Downvote",
+              "value": "downvote"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "upvote",
+                  "downvote"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Whether this is an upvote or downvote",
+        "name": "voteType",
+        "type": "string"
+      },
+      {
+        "description": "The post being voted on (if applicable)",
+        "to": [
+          {
+            "type": "post"
+          }
+        ],
+        "name": "post",
+        "type": "reference"
+      },
+      {
+        "description": "The comment being voted on (if applicable)",
+        "to": [
+          {
+            "type": "comment"
+          }
+        ],
+        "name": "comment",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "When this vote was cast",
+        "name": "createdAt",
+        "type": "datetime"
+      }
+    ],
+    "name": "vote",
+    "type": "document"
+  },
+  {
+    "description": "A community where users can post and engage with content",
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Name of the subreadit",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "description": "A brief description of what this subreadit is about",
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The unique URL-friendly identifier for this subreadit",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "description": "Icon or banner image for the subreadit",
+        "fields": [
+          {
+            "description": "Alternative text for screen readers and SEO",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The user who created this subreadit and has admin privileges",
+        "to": [
+          {
+            "type": "user"
+          }
+        ],
+        "name": "moderator",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "When this subreadit was created",
+        "name": "createdAt",
+        "type": "datetime"
+      }
+    ],
+    "name": "subreadit",
+    "type": "document"
+  },
+  {
+    "description": "A user submitted a post in subreadit",
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 300
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The title of this post",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "description": "Stores the original title if the post is deleted",
+        "hidden": true,
+        "name": "originalTitle",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The user who created this post",
+        "to": [
+          {
+            "type": "user"
+          }
+        ],
+        "name": "author",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "This subreadit post belongs to",
+        "to": [
+          {
+            "type": "subreadit"
+          }
+        ],
+        "name": "subreadit",
+        "type": "reference"
+      },
+      {
+        "description": "The main content of the post",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      },
+      {
+        "description": "optional image for the post",
+        "fields": [
+          {
+            "description": "Alternative text for screen readers and SEO",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt text"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "initialValue": false,
+        "description": "Indicates if this post has been reported by users",
+        "name": "isReported",
+        "type": "boolean"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "When this post was published",
+        "name": "publishedAt",
+        "type": "datetime"
+      },
+      {
+        "initialValue": false,
+        "description": "Indicates if this post has been deleted",
+        "name": "isDeleted",
+        "type": "boolean"
+      }
+    ],
+    "name": "post",
+    "type": "document"
+  },
+  {
+    "description": "A comment on a post or another comment",
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The text content of the comment",
+        "name": "content",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The user who wrote this comment",
+        "to": [
+          {
+            "type": "user"
+          }
+        ],
+        "name": "author",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "The post this comment belongs to (even for nested comments)",
+        "to": [
+          {
+            "type": "post"
+          }
+        ],
+        "name": "post",
+        "type": "reference"
+      },
+      {
+        "description": "If this is a reply, reference to the parent comment",
+        "to": [
+          {
+            "type": "comment"
+          }
+        ],
+        "name": "parentComment",
+        "type": "reference"
+      },
+      {
+        "initialValue": false,
+        "description": "Indicates if this comment has been reported by users",
+        "name": "isReported",
+        "type": "boolean"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "When this comment was posted",
+        "name": "createdAt",
+        "type": "datetime"
+      },
+      {
+        "initialValue": false,
+        "description": "Indicates if this comment has been deleted",
+        "name": "isDeleted",
+        "type": "boolean"
+      }
+    ],
+    "name": "comment",
+    "type": "document"
+  }
+]
