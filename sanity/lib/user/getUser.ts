@@ -11,14 +11,14 @@ interface UserResult {
 }
 
 const parseUsername = (username: string) => {
-  // Remove whitespace and convert to camelCase with random number to avoid conflicts
+ 
   const randomNum = Math.floor(1000 + Math.random() * 9000);
 
-  // Convert whitespace to camelCase and add random number to avoid conflicts
+  
   return (
     username
-      .replace(/\s+(.)/g, (_, char) => char.toUpperCase()) // Convert whitespace to camelCase
-      .replace(/\s+/g, "") + randomNum // Remove all whitespace and add random number
+      .replace(/\s+(.)/g, (_, char) => char.toUpperCase()) 
+      .replace(/\s+/g, "") + randomNum 
   );
 };
 
@@ -34,7 +34,7 @@ export async function getUser(): Promise<UserResult | { error: string }> {
 
     console.log(`Found Clerk user: ${loggedInUser.id}`);
 
-    // Check if user exists in the database first
+    
     const getExistingUserQuery = defineQuery(
       `*[_type == "user" && _id == $id][0]`
     );
@@ -45,7 +45,7 @@ export async function getUser(): Promise<UserResult | { error: string }> {
       params: { id: loggedInUser.id },
     });
 
-    // If user exists, return the user data
+  
     if (existingUser.data?._id) {
       console.log(`User found in database with ID: ${existingUser.data._id}`);
       const user = {
@@ -53,6 +53,7 @@ export async function getUser(): Promise<UserResult | { error: string }> {
         username: existingUser.data.username!,
         imageUrl: existingUser.data.imageUrl!,
         email: existingUser.data.email!,
+
       };
 
       return user;
